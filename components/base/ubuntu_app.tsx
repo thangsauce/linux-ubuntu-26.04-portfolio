@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { showNotification } from '../utils/notification';
 
 interface UbuntuAppProps {
     id: string;
@@ -14,20 +15,6 @@ interface UbuntuAppState {
     shaking: boolean;
 }
 
-// Global toast — one instance shared across all app icons
-let toastTimeout: ReturnType<typeof setTimeout> | null = null;
-
-function showNoWifiToast(): void {
-    const toast = document.getElementById('no-wifi-toast');
-    if (!toast) return;
-    toast.classList.remove('opacity-0', 'translate-y-2');
-    toast.classList.add('opacity-100', 'translate-y-0');
-    if (toastTimeout) clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
-        toast.classList.add('opacity-0', 'translate-y-2');
-    }, 2000);
-}
 
 export class UbuntuApp extends Component<UbuntuAppProps, UbuntuAppState> {
     constructor(props: UbuntuAppProps) {
@@ -39,7 +26,7 @@ export class UbuntuApp extends Component<UbuntuAppProps, UbuntuAppState> {
         if (this.props.isExternalApp && this.props.url) {
             if (this.props.wifi === false) {
                 this.setState({ shaking: true });
-                showNoWifiToast();
+                showNotification('No Internet Connection', 'Turn Wi-Fi back on to open external links.');
                 setTimeout(() => this.setState({ shaking: false }), 500);
                 return;
             }

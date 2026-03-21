@@ -16,6 +16,7 @@ import UbuntuApp from '../base/ubuntu_app';
 import AllApplications from '../screen/all-applications';
 import DesktopMenu from '../context-menus/desktop-menu';
 import DefaultMenu from '../context-menus/default';
+import NotificationContainer from '../utils/notification';
 import $ from 'jquery';
 import ReactGA from 'react-ga4';
 
@@ -655,14 +656,8 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
                         openApp={this.openApp}
                         bg_image_name={this.props.bg_image_name} /> : null}
 
-                {/* No wifi toast */}
-                <div id="no-wifi-toast" className="fixed bottom-6 left-1/2 -translate-x-1/2 opacity-0 translate-y-2 transition-all duration-300 pointer-events-none z-50 flex items-center gap-2 bg-gray-900 bg-opacity-90 text-white text-xs px-4 py-2 rounded-full shadow-lg">
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0" fill="currentColor">
-                        <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z" opacity="0.3" />
-                        <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
-                    No internet connection
-                </div>
+                {/* GNOME-style notification toasts */}
+                <NotificationContainer />
 
             </div>
         )

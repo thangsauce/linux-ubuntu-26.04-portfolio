@@ -8,9 +8,9 @@ import { displayTerminal } from './components/apps/terminal';
 import { displaySettings } from './components/apps/settings';
 import { displayFirefox } from './components/apps/firefox';
 import { displayTrash } from './components/apps/trash';
-import { displayGedit } from './components/apps/gedit';
 import { displayAboutThang } from './components/apps/thang';
 import { displayTerminalCalc } from './components/apps/calc';
+import { displayContact } from './components/apps/contact';
 import { ReactNode } from 'react';
 
 export interface AppConfig {
@@ -38,6 +38,7 @@ const apps: AppConfig[] = [
     { id: "trash", title: "Trash", icon: './themes/Yaru/system/user-trash-full.png', disabled: false, favourite: false, desktop_shortcut: true, screen: displayTrash },
     { id: "github", title: "GitHub", icon: './themes/Yaru/apps/github.png', disabled: false, favourite: false, desktop_shortcut: true, isExternalApp: true, url: "https://github.com/thangsauce", screen: () => null },
     { id: "linkedin", title: "LinkedIn", icon: './themes/Yaru/apps/linkedin.png', disabled: false, favourite: false, desktop_shortcut: true, isExternalApp: true, url: "https://www.linkedin.com/in/thangle", screen: () => null },
+    { id: "contact", title: "Contact Me", icon: './themes/Yaru/apps/gedit.png', disabled: false, favourite: false, desktop_shortcut: true, screen: displayContact },
 ];
 
 export default apps;

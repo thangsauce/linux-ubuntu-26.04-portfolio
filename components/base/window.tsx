@@ -268,7 +268,7 @@ export class Window extends Component<WindowProps, WindowState> {
                 bounds={{ left: 0, top: 0, right: this.state.parentSize.width, bottom: this.state.parentSize.height }}
             >
                 <div style={{ width: `${this.state.width}%`, height: `${this.state.height}%` }}
-                    className={this.state.cursorType + " " + (this.state.closed ? " closed-window " : "") + (this.state.maximized ? " duration-300 rounded-none" : " rounded-lg rounded-b-none") + (this.props.minimized ? " opacity-0 invisible duration-200 " : "") + (this.props.isFocused ? " z-30 " : " z-20 notFocused") + " opened-window overflow-hidden min-w-1/4 min-h-1/4 main-window absolute window-shadow border-black border-opacity-40 border border-t-0 flex flex-col"}
+                    className={this.state.cursorType + " " + (this.state.closed ? " closed-window " : "") + (this.state.maximized ? " duration-300 rounded-none" : " rounded-[14px]") + (this.props.minimized ? " opacity-0 invisible duration-200 " : "") + (this.props.isFocused ? " z-30 " : " z-20 notFocused") + " opened-window overflow-hidden min-w-1/4 min-h-1/4 main-window absolute window-shadow border-black border-opacity-40 border border-t-0 flex flex-col"}
                     id={this.id!}
                 >
                     <WindowYBorder resize={this.handleHorizontalResize} />
@@ -310,7 +310,7 @@ interface WindowTopBarProps {
 
 export function WindowTopBar(props: WindowTopBarProps) {
     return (
-        <div className={" relative bg-ub-window-title border-t-2 border-white border-opacity-5 py-1.5 px-3 text-white w-full select-none rounded-b-none"}>
+        <div className={" relative bg-ub-window-title border-t-2 border-white border-opacity-5 py-2.5 px-3 text-white w-full select-none rounded-b-none"}>
             <div className="flex justify-center text-sm font-bold">{props.title}</div>
         </div>
     )
@@ -365,38 +365,38 @@ interface WindowEditButtonsProps {
 export function WindowEditButtons(props: WindowEditButtonsProps) {
     return (
         <div className="absolute select-none right-0 top-0 mt-1 mr-1 flex justify-center items-center">
-            <span className="mx-1.5 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-5 w-5 items-center" onClick={props.minimize}>
+            <span className="mx-1.5 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-6 w-6 items-center" onClick={props.minimize}>
                 <img
                     src="./themes/Yaru/window/window-minimize-symbolic.svg"
                     alt="ubuntu window minimize"
-                    className="h-5 w-5 inline"
+                    className="h-6 w-6 inline"
                 />
             </span>
             {
                 (props.isMaximised
                     ?
-                    <span className="mx-2 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-5 w-5 items-center" onClick={props.maximize}>
+                    <span className="mx-2 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-6 w-6 items-center" onClick={props.maximize}>
                         <img
                             src="./themes/Yaru/window/window-restore-symbolic.svg"
                             alt="ubuntu window restore"
-                            className="h-5 w-5 inline"
+                            className="h-6 w-6 inline"
                         />
                     </span>
                     :
-                    <span className="mx-2 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-5 w-5 items-center" onClick={props.maximize}>
+                    <span className="mx-2 bg-white bg-opacity-0 hover:bg-opacity-10 rounded-full flex justify-center mt-1 h-6 w-6 items-center" onClick={props.maximize}>
                         <img
                             src="./themes/Yaru/window/window-maximize-symbolic.svg"
                             alt="ubuntu window maximize"
-                            className="h-5 w-5 inline"
+                            className="h-6 w-6 inline"
                         />
                     </span>
                 )
             }
-            <button tabIndex={-1} id={`close-${props.id}`} className="mx-1.5 focus:outline-none cursor-default bg-ub-orange bg-opacity-90 hover:bg-opacity-100 rounded-full flex justify-center mt-1 h-5 w-5 items-center" onClick={props.close}>
+            <button tabIndex={-1} id={`close-${props.id}`} className="mx-1.5 focus:outline-none cursor-default bg-ub-orange bg-opacity-90 hover:bg-opacity-100 rounded-full flex justify-center mt-1 h-6 w-6 items-center" onClick={props.close}>
                 <img
                     src="./themes/Yaru/window/window-close-symbolic.svg"
                     alt="ubuntu window close"
-                    className="h-5 w-5 inline"
+                    className="h-6 w-6 inline"
                 />
             </button>
         </div>

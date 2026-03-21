@@ -44,11 +44,11 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
 
     render() {
         return (
-            <div className="main-navbar-vp absolute top-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-ub-grey text-ubt-grey text-sm select-none z-50">
+            <div className="main-navbar-vp absolute top-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-ub-grey text-ubt-grey text-sm select-none z-50 border-b border-white border-opacity-5">
                 <div
                     tabIndex={0}
                     className={
-                        'pl-4 pr-3 outline-none py-1 '
+                        'pl-4 pr-3 outline-none py-1.5 '
                     }
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="4" viewBox="0 0 34 4" fill="currentColor">
@@ -59,7 +59,7 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
                 <div
                     tabIndex={0}
                     className={
-                        'pl-2 pr-2 text-xs md:text-sm outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1'
+                        'pl-2 pr-2 text-xs md:text-sm outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1.5'
                     }
                 >
                     <Clock />
@@ -72,7 +72,7 @@ export default class Navbar extends Component<NavbarProps, NavbarState> {
                     }}
                     // removed onBlur from here
                     className={
-                        'relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1 '
+                        'relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1.5 '
                     }
                 >
                     <Status wifi={this.props.wifi} muted={this.state.muted} wifiSignal={this.state.wifiSignal} />

@@ -74,7 +74,7 @@ export class SideBarApp extends Component<SideBarAppProps, SideBarAppState> {
                 />
                 {
                     this.id && this.props.isClose[this.id] === false
-                        ? <div className=" w-1 h-1 absolute left-0 top-1/2 bg-ub-orange rounded-sm"></div>
+                        ? <div className="dock-pill-indicator absolute left-0 top-1/2 transform -translate-y-1/2"></div>
                         : null
                 }
                 <div

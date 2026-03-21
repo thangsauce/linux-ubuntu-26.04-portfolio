@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import { WifiIcon } from './status';
+import { showNotification } from './notification';
 
 interface SliderProps {
     value: number;
@@ -173,15 +174,21 @@ export class StatusCard extends Component<StatusCardProps, StatusCardState> {
             }
             if (key === 'wifi' && this.props.onWifiChange) {
                 this.props.onWifiChange(newVal as boolean);
+                showNotification(
+                    newVal ? 'Wi-Fi Connected' : 'Wi-Fi Disconnected',
+                    newVal ? 'Network connection established.' : 'You are now offline.'
+                );
             }
             if (key === 'airplaneMode') {
                 updates.bluetooth = false;
                 if (newVal) {
                     updates.wifi = false;
                     if (this.props.onWifiChange) this.props.onWifiChange(false);
+                    showNotification('Airplane Mode On', 'Wi-Fi and Bluetooth disabled.');
                 } else {
                     updates.wifi = true;
                     if (this.props.onWifiChange) this.props.onWifiChange(true);
+                    showNotification('Airplane Mode Off', 'Network connections restored.');
                 }
             }
 

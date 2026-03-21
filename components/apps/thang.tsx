@@ -1,7 +1,7 @@
 // "About Thang" app — personal portfolio content rendered inside a window.
 // Sections: About, Education, Certifications, Skills, Projects, Resume.
 // Active section is persisted to localStorage so it reopens where you left off.
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import ReactGA from 'react-ga4';
 
 interface AboutThangState {
@@ -99,10 +99,13 @@ export class AboutThang extends Component<Record<string, never>, AboutThangState
                 <div className="md:flex hidden flex-col w-1/4 md:w-1/5 text-sm overflow-y-auto windowMainScreen border-r border-black">
                     {this.renderNavLinks()}
                 </div>
-                <div onClick={this.showNavBar} className="md:hidden flex flex-col items-center justify-center absolute bg-ub-cool-grey rounded w-6 h-6 top-1 left-1">
-                    <div className=" w-3.5 border-t border-white"></div>
-                    <div className=" w-3.5 border-t border-white" style={{ marginTop: "2pt", marginBottom: "2pt" }}></div>
-                    <div className=" w-3.5 border-t border-white"></div>
+                <div onClick={this.showNavBar} className="md:hidden flex items-center gap-2 absolute bg-ub-cool-grey hover:bg-ub-warm-grey hover:bg-opacity-20 rounded-md px-2.5 py-1.5 top-2 left-2 cursor-default border border-white border-opacity-10">
+                    <div className="flex flex-col gap-0.5 justify-center">
+                        <div className="w-3.5 border-t border-white"></div>
+                        <div className="w-3.5 border-t border-white"></div>
+                        <div className="w-3.5 border-t border-white"></div>
+                    </div>
+                    <span className="text-xs text-gray-300 whitespace-nowrap">More Details</span>
                     <div className={(this.state.navbar ? " visible animateShow z-30 " : " invisible ") + " md:hidden text-xs absolute bg-ub-cool-grey py-0.5 px-1 rounded-sm top-full mt-1 left-0 shadow border-black border border-opacity-20"}>
                         {this.renderNavLinks()}
                     </div>
@@ -121,6 +124,43 @@ export const displayAboutThang = () => {
     return <AboutThang />;
 }
 
+
+const WHOAMI_LINES = [
+    { delay: 0,    jsx: <div className="text-green-400">thang@resolute-raccoon:~$ whoami</div> },
+    { delay: 600,  jsx: <div className="mt-2"><span className="text-yellow-400">name</span><span className="text-gray-500">:</span> <span className="text-white">Thang Le</span></div> },
+    { delay: 850,  jsx: <div><span className="text-yellow-400">located_in</span><span className="text-gray-500">:</span> <span className="text-white">Orlando, FL</span></div> },
+    { delay: 1050, jsx: <div><span className="text-yellow-400">current_status</span><span className="text-gray-500">:</span> <span className="text-white">IT Student @ UCF</span></div> },
+    { delay: 1250, jsx: <div className="mt-2"><span className="text-yellow-400">areas_of_expertise</span><span className="text-gray-500">:</span></div> },
+    { delay: 1400, jsx: <div className="ml-4 text-gray-300">- 🌐 Web Development</div> },
+    { delay: 1550, jsx: <div className="ml-4 text-gray-300">- 🔐 Cybersecurity</div> },
+    { delay: 1700, jsx: <div className="ml-4 text-gray-300">- ☁️ Cloud Infrastructure</div> },
+    { delay: 1850, jsx: <div className="ml-4 text-gray-300">- ⚙️ Backend Systems</div> },
+    { delay: 2050, jsx: <div className="mt-2"><span className="text-yellow-400">currently_building</span><span className="text-gray-500">:</span></div> },
+    { delay: 2200, jsx: <div className="ml-4 text-gray-300">- Full-Stack Web Applications</div> },
+    { delay: 2350, jsx: <div className="ml-4 text-gray-300">- Portfolio Projects</div> },
+    { delay: 2500, jsx: <div className="ml-4 text-gray-300">- IT Infrastructure Labs</div> },
+    { delay: 2700, jsx: <div className="mt-2"><span className="text-yellow-400">life_philosophy</span><span className="text-gray-500">:</span> <span className="text-green-300">&quot;Wherever you go, there you are.&quot;</span></div> },
+    { delay: 2950, jsx: <div className="mt-2 text-green-400">thang@resolute-raccoon:~$ <span className="animate-pulse">▋</span></div> },
+];
+
+function TypingTerminal() {
+    const [visibleCount, setVisibleCount] = useState(0);
+
+    useEffect(() => {
+        const timers = WHOAMI_LINES.map((line, i) =>
+            setTimeout(() => setVisibleCount(i + 1), line.delay)
+        );
+        return () => timers.forEach(clearTimeout);
+    }, []);
+
+    return (
+        <div className="p-4 font-mono text-xs md:text-sm space-y-1">
+            {WHOAMI_LINES.slice(0, visibleCount).map((line, i) => (
+                <React.Fragment key={i}>{line.jsx}</React.Fragment>
+            ))}
+        </div>
+    );
+}
 
 function About() {
     return (
@@ -145,23 +185,7 @@ function About() {
                     <span className="w-3 h-3 rounded-full bg-green-500"></span>
                     <span className="ml-2 text-xs text-gray-400 font-mono">terminal</span>
                 </div>
-                <div className="p-4 font-mono text-xs md:text-sm space-y-1">
-                    <div className="text-green-400">thang@Desktop:~$</div>
-                    <div className="mt-2"><span className="text-yellow-400">name</span><span className="text-gray-500">:</span> <span className="text-white">Thang Le</span></div>
-                    <div><span className="text-yellow-400">located_in</span><span className="text-gray-500">:</span> <span className="text-white">Orlando, FL</span></div>
-                    <div><span className="text-yellow-400">current_status</span><span className="text-gray-500">:</span> <span className="text-white">IT Student @ UCF</span></div>
-                    <div className="mt-2"><span className="text-yellow-400">areas_of_expertise</span><span className="text-gray-500">:</span></div>
-                    <div className="ml-4 text-gray-300">- 🌐 Web Development</div>
-                    <div className="ml-4 text-gray-300">- 🔐 Cybersecurity</div>
-                    <div className="ml-4 text-gray-300">- ☁️ Cloud Infrastructure</div>
-                    <div className="ml-4 text-gray-300">- ⚙️ Backend Systems</div>
-                    <div className="mt-2"><span className="text-yellow-400">currently_building</span><span className="text-gray-500">:</span></div>
-                    <div className="ml-4 text-gray-300">- Full-Stack Web Applications</div>
-                    <div className="ml-4 text-gray-300">- Portfolio Projects</div>
-                    <div className="ml-4 text-gray-300">- IT Infrastructure Labs</div>
-                    <div className="mt-2"><span className="text-yellow-400">life_philosophy</span><span className="text-gray-500">:</span> <span className="text-green-300">"Wherever you go, there you are."</span></div>
-                    <div className="mt-2 text-green-400">thang@Desktop:~$ <span className="animate-pulse">▋</span></div>
-                </div>
+                <TypingTerminal />
             </div>
 
             {/* Two column cards */}
@@ -236,6 +260,17 @@ function Certifications() {
     )
 }
 
+const CDN = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons';
+interface SkillChipProps { label: string; bg: string; fg?: string; icon: string; imgFilter?: string; }
+function SkillChip({ label, bg, fg = '#ffffff', icon, imgFilter }: SkillChipProps) {
+    return (
+        <span className="m-1 px-2.5 py-1 rounded-md text-xs font-medium" style={{ backgroundColor: bg, color: fg, display: 'inline-flex', flexDirection: 'row', alignItems: 'center', gap: '6px' }}>
+            <img src={icon} alt={label} style={{ width: '14px', height: '14px', display: 'block', flexShrink: 0, filter: imgFilter }} />
+            {label}
+        </span>
+    );
+}
+
 function Skills() {
     return (
         <>
@@ -247,46 +282,41 @@ function Skills() {
                 </div>
             </div>
             <div className="w-full md:w-10/12 mt-6 px-2">
-                <div className="mb-4">
-                    <div className="text-sm md:text-base font-bold mb-2">Frontend</div>
+                <div className="mb-5">
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Frontend</div>
                     <div className="flex flex-wrap">
-                        <img className="m-1" src="https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A" alt="javascript" />
-                        <img className="m-1" src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" alt="typescript" />
-                        <img className="m-1" src="https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=ffffff" alt="react" />
-                        <img className="m-1" src="https://img.shields.io/badge/Next-black?style=flat&logo=next.js&logoColor=ffffff" alt="next.js" />
-                        <img className="m-1" src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white" alt="tailwind css" />
-                        <img className="m-1" src="https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white" alt="bootstrap" />
+                        <SkillChip label="JavaScript"  bg="#F7DF1E" fg="#000" icon={`${CDN}/javascript/javascript-original.svg`} />
+                        <SkillChip label="TypeScript"   bg="#3178C6"            icon={`${CDN}/typescript/typescript-original.svg`} />
+                        <SkillChip label="React"        bg="#20232A"            icon={`${CDN}/react/react-original.svg`} />
+                        <SkillChip label="Next.js"      bg="#1a1a1a"            icon={`${CDN}/nextjs/nextjs-original.svg`} imgFilter="brightness(0) invert(1)" />
+                        <SkillChip label="Tailwind CSS" bg="#0F172A"            icon={`${CDN}/tailwindcss/tailwindcss-original.svg`} />
+                        <SkillChip label="Bootstrap"    bg="#563D7C"            icon={`${CDN}/bootstrap/bootstrap-original.svg`} />
                     </div>
                 </div>
-                <div className="mb-4">
-                    <div className="text-sm md:text-base font-bold mb-2">Backend</div>
+                <div className="mb-5">
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Backend</div>
                     <div className="flex flex-wrap">
-                        <img className="m-1" src="http://img.shields.io/badge/-Python-3776AB?style=flat&logo=python&logoColor=ffffff" alt="python" />
-                        <img className="m-1" src="https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white" alt="java" />
-                        <img className="m-1" src="https://img.shields.io/badge/-Nodejs-339933?style=flat&logo=Node.js&logoColor=ffffff" alt="node.js" />
+                        <SkillChip label="Python"  bg="#3776AB" icon={`${CDN}/python/python-original.svg`} />
+                        <SkillChip label="Java"    bg="#ED8B00" icon={`${CDN}/java/java-original.svg`} />
+                        <SkillChip label="Node.js" bg="#1d5c1d" icon={`${CDN}/nodejs/nodejs-original.svg`} />
                     </div>
                 </div>
-                <div className="mb-4">
-                    <div className="text-sm md:text-base font-bold mb-2">Databases</div>
+                <div className="mb-5">
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Databases</div>
                     <div className="flex flex-wrap">
-                        <img className="m-1" src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white" alt="mysql" />
-                        <img className="m-1" src="https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white" alt="postgresql" />
-                        <img className="m-1" src="https://img.shields.io/badge/MongoDB-4EA94B?style=flat&logo=mongodb&logoColor=white" alt="mongodb" />
+                        <SkillChip label="MySQL"      bg="#0d2a4a" icon={`${CDN}/mysql/mysql-original.svg`} />
+                        <SkillChip label="PostgreSQL" bg="#316192" icon={`${CDN}/postgresql/postgresql-original.svg`} />
+                        <SkillChip label="MongoDB"    bg="#1e5c1a" icon={`${CDN}/mongodb/mongodb-original.svg`} />
                     </div>
                 </div>
-                <div className="mb-4">
-                    <div className="text-sm md:text-base font-bold mb-2">Tools & OS</div>
+                <div className="mb-5">
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Tools & OS</div>
                     <div className="flex flex-wrap">
-                        <img className="m-1" src="https://img.shields.io/badge/-Git-%23F05032?style=flat&logo=git&logoColor=%23ffffff" alt="git" />
-                        <img className="m-1" src="https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=vscodium&logoColor=white" alt="vs code" />
-                        <img className="m-1" src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="linux" />
-                        <span className="m-1 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium text-white" style={{backgroundColor:"#0078D6"}}>
-                            <svg className="mr-1" width="12" height="12" viewBox="0 0 23 23" fill="white" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h11v11H0zm12 0h11v11H12zM0 12h11v11H0zm12 0h11v11H12z"/>
-                            </svg>
-                            Windows
-                        </span>
-                        <img className="m-1" src="https://img.shields.io/badge/macOS-000000?style=flat&logo=apple&logoColor=white" alt="macos" />
+                        <SkillChip label="Git"     bg="#8a2208" icon={`${CDN}/git/git-original.svg`} imgFilter="brightness(0) invert(1)" />
+                        <SkillChip label="VS Code" bg="#007ACC" icon={`${CDN}/vscode/vscode-original.svg`} />
+                        <SkillChip label="Linux"   bg="#2a2a2a" icon={`${CDN}/linux/linux-original.svg`} />
+                        <SkillChip label="Windows" bg="#0078D6" icon={`${CDN}/windows8/windows8-original.svg`} />
+                        <SkillChip label="macOS"   bg="#555555" icon={`${CDN}/apple/apple-original.svg`} imgFilter="brightness(0) invert(1)" />
                     </div>
                 </div>
             </div>

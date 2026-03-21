@@ -328,8 +328,88 @@ export class Terminal extends Component<Props, State> {
 
                 result = "<img class=' w-2/5' src='./images/memes/sudo.gif' style='border-radius:8px;' />";
                 break;
+            case "neofetch": {
+                const asciiArt = [
+                    `           .-/+oossssoo+/-.         `,
+                    `        \`:+ssssssssssssssssss+\`     `,
+                    `      -+ssssssssssssssssssyyssss+-   `,
+                    `    .osssssssssssssssssssdMMMNysssso. `,
+                    `   /ssssssssssshdmmNNmmyNMMMMhssssss/ `,
+                    `  +sssssssshNMMMyhhyyyyhmNMMMNhssssss+`,
+                    `  osssssssdMMMNhsssssssssshNMMMdssssss`,
+                    `  osssssssdMMMNhsssssssssshNMMMdssssss`,
+                    `  +sssssssshNMMMyhhyyyyhmNMMMNhssssss+`,
+                    `   /ssssssssssshdmNNNNmyNMMMMhssssss/ `,
+                    `    .osssssssssssssssssssdMMMNysssso. `,
+                    `      -+sssssssssssssssssyyyssss+-   `,
+                    `        \`:+ssssssssssssssssss+\`     `,
+                    `           .-/+oossssoo+/-.         `,
+                ].join('\n');
+                result = `<div class="flex gap-6 my-1">` +
+                    `<pre class="text-ub-orange text-xs leading-tight select-none">${asciiArt}</pre>` +
+                    `<div class="text-xs leading-relaxed">` +
+                    `<span class="text-ub-orange font-bold">thangle</span><span class="text-white">@</span><span class="text-ub-orange font-bold">resolute-raccoon</span>` +
+                    `<div class="text-gray-500">─────────────────────────────</div>` +
+                    `<div><span class="text-ubt-green font-bold">OS:      </span> Ubuntu 26.04 LTS Resolute Raccoon</div>` +
+                    `<div><span class="text-ubt-green font-bold">Kernel:  </span> 6.14.0-26-generic</div>` +
+                    `<div><span class="text-ubt-green font-bold">Uptime:  </span> Since you opened this tab</div>` +
+                    `<div><span class="text-ubt-green font-bold">Shell:   </span> zsh 5.9</div>` +
+                    `<div><span class="text-ubt-green font-bold">DE:      </span> GNOME 50</div>` +
+                    `<div><span class="text-ubt-green font-bold">WM:      </span> Mutter (Resolute Raccoon)</div>` +
+                    `<div><span class="text-ubt-green font-bold">CPU:     </span> Your Brain&#x2122; (overclocked)</div>` +
+                    `<div><span class="text-ubt-green font-bold">Memory:  </span> ${Math.floor(Math.random() * 4000 + 6000)} MB / 16384 MB</div>` +
+                    `<div><span class="text-ubt-green font-bold">Disk:    </span> 148 GB / 512 GB</div>` +
+                    `<div><span class="text-ubt-green font-bold">Terminal:</span> thang-terminal 26.04</div>` +
+                    `</div></div>`;
+                break;
+            }
+            case "uname":
+                result = "Linux resolute-raccoon 6.14.0-26-generic #26-Ubuntu SMP PREEMPT_DYNAMIC Fri Apr 10 14:32:00 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux";
+                break;
+            case "lsb_release":
+                result = [
+                    `No LSB modules are available.`,
+                    `<div>Distributor ID: Ubuntu</div>`,
+                    `<div>Description:    Ubuntu 26.04 LTS</div>`,
+                    `<div>Release:        26.04</div>`,
+                    `<div>Codename:       resolute-raccoon</div>`,
+                ].join('');
+                break;
+            case "git":
+                if (rest === "log --oneline" || rest === "log") {
+                    result = [
+                        `<div class="font-mono text-xs leading-relaxed">`,
+                        `<div><span class="text-yellow-400">a1f3c9d</span> <span class="text-ubt-green">(HEAD -&gt; main, origin/main)</span> feat: ubuntu 26.04 resolute raccoon theme</div>`,
+                        `<div><span class="text-yellow-400">b2e4d7f</span> feat: contact form with EmailJS integration</div>`,
+                        `<div><span class="text-yellow-400">c3f5e8a</span> feat: gnome system monitor app</div>`,
+                        `<div><span class="text-yellow-400">d4a6b9c</span> feat: gnome notification toast system</div>`,
+                        `<div><span class="text-yellow-400">e5b7c0d</span> feat: neofetch and terminal commands</div>`,
+                        `<div><span class="text-yellow-400">64e7d44</span> Initial commit</div>`,
+                        `</div>`,
+                    ].join('');
+                } else {
+                    result = `git: '${rest}' is not a git command. Try: git log --oneline`;
+                }
+                break;
+            case "cat":
+                if (rest === "about.txt" || rest === "~/about.txt") {
+                    result = [
+                        `<div class="font-mono text-xs leading-relaxed my-1">`,
+                        `<div><span class="text-ubt-green font-bold">Name:      </span> Thang Le</div>`,
+                        `<div><span class="text-ubt-green font-bold">Role:      </span> IT Specialist &amp; Full-Stack Developer</div>`,
+                        `<div><span class="text-ubt-green font-bold">Location:  </span> Orlando, FL</div>`,
+                        `<div><span class="text-ubt-green font-bold">Education: </span> UCF &mdash; B.S. Information Technology (2027)</div>`,
+                        `<div><span class="text-ubt-green font-bold">Focus:     </span> Web Dev, Cybersecurity, Cloud, Backend</div>`,
+                        `<div><span class="text-ubt-green font-bold">Contact:   </span> thangle.me &nbsp;|&nbsp; github.com/thangsauce</div>`,
+                        `<div class="mt-1 text-gray-400 italic">"Wherever you go, there you are."</div>`,
+                        `</div>`,
+                    ].join('');
+                } else {
+                    result = `cat: ${rest}: No such file or directory`;
+                }
+                break;
             default:
-                result = "Command '" + main + "' not found, or not yet implemented.<br>Available Commands: [ cd, ls, pwd, echo, clear, exit, mkdir, code, ytmusic, firefox, about-thang, trash, settings ]";
+                result = "Command '" + main + "' not found, or not yet implemented.<br>Available Commands: [ cd, ls, pwd, echo, clear, exit, mkdir, neofetch, uname, lsb_release, git log, cat about.txt, code, ytmusic, firefox, about-thang, trash, settings ]";
         }
         const resultEl = document.getElementById(`row-result-${rowId}`);
         if (resultEl) resultEl.innerHTML = result;
