@@ -26,12 +26,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: "pnpm"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: Installing Packages 🥁
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Building 🧱
-        run: npm run build
+        run: pnpm build
         env:
           NEXT_PUBLIC_TRACKING_ID: G-8FBXBFXC10
           NEXT_PUBLIC_SERVICE_ID: service_qt4ryip

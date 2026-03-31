@@ -22,10 +22,10 @@ Interact with a fully simulated Ubuntu desktop — open apps, use the terminal, 
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -48,8 +48,8 @@ Apps are registered in `apps.config.ts`. Each app entry defines its icon, title,
 
 ```bash
 # Production build
-npm run build
+pnpm build
 
 # Start production server
-npm start
+pnpm start
 ```

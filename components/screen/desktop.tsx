@@ -92,26 +92,35 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
         this.removeContextListeners();
     }
 
+    parseJsonArray<T>(raw: string | null, fallback: T[]): T[] {
+        if (!raw || raw.trim() === '') return fallback;
+        try {
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? (parsed as T[]) : fallback;
+        } catch {
+            return fallback;
+        }
+    }
+
     checkForNewFolders = () => {
         var new_folders = localStorage.getItem('new_folders');
-        if (new_folders === null && new_folders !== undefined) {
-            localStorage.setItem("new_folders", JSON.stringify([]));
+        const parsed = this.parseJsonArray<{ id: string; name: string }>(new_folders, []);
+        if (!new_folders || parsed.length === 0) {
+            localStorage.setItem("new_folders", JSON.stringify(parsed));
         }
-        else {
-            const parsed: Array<{ id: string; name: string }> = JSON.parse(new_folders as string);
-            parsed.forEach(folder => {
-                apps.push({
-                    id: `new-folder-${folder.id}`,
-                    title: folder.name,
-                    icon: './themes/Yaru/system/folder.png',
-                    disabled: true,
-                    favourite: false,
-                    desktop_shortcut: true,
-                    screen: () => null,
-                } as AppConfig);
-            });
-            this.updateAppsData();
-        }
+
+        parsed.forEach(folder => {
+            apps.push({
+                id: `new-folder-${folder.id}`,
+                title: folder.name,
+                icon: './themes/Yaru/system/folder.png',
+                disabled: true,
+                favourite: false,
+                desktop_shortcut: true,
+                screen: () => null,
+            } as AppConfig);
+        });
+        this.updateAppsData();
     }
 
     setEventListeners = () => {
@@ -458,7 +467,10 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
         else {
             let closed_windows = this.state.closed_windows;
             let favourite_apps = this.state.favourite_apps;
-            var frequentApps: Array<{ id: string; frequency: number }> = localStorage.getItem('frequentApps') ? JSON.parse(localStorage.getItem('frequentApps')!) : [];
+            var frequentApps: Array<{ id: string; frequency: number }> = this.parseJsonArray(
+                localStorage.getItem('frequentApps'),
+                []
+            );
             var currentApp = frequentApps.find(app => app.id === objId);
             if (currentApp) {
                 frequentApps.forEach((app) => {
@@ -552,7 +564,10 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
             screen: () => null,
         } as AppConfig);
         // store in local storage
-        var new_folders: Array<{ id: string; name: string }> = JSON.parse(localStorage.getItem('new_folders')!);
+        var new_folders: Array<{ id: string; name: string }> = this.parseJsonArray(
+            localStorage.getItem('new_folders'),
+            []
+        );
         new_folders.push({ id: `new-folder-${folder_id}`, name: folder_name });
         localStorage.setItem("new_folders", JSON.stringify(new_folders));
 
