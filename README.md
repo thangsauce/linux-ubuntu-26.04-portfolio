@@ -2,6 +2,7 @@
 
 A portfolio website that recreates a Linux desktop experience, letting visitors explore your work through app windows, dock interactions, and Ubuntu-inspired UI.
 
+![LinuxLongThumbnailGif](https://github.com/user-attachments/assets/4204f7da-10b0-4785-9c3c-e614d35d7f06)
 Live site: [https://thangsauce.github.io/linux-ubuntu-26.04-portfolio](https://thangsauce.github.io/linux-ubuntu-26.04-portfolio)
 
 ## Highlights
