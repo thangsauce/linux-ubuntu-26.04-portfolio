@@ -11,7 +11,7 @@ export default function Meta(): React.ReactNode {
             <base href={`${basePath || ''}/`} />
             <title>Thang&apos;s Ubuntu 26.04 LTS Desktop</title>
             <meta name="description" content="Ubuntu 26.04 LTS 'Resolute Raccoon' — Thang Le's interactive portfolio" />
-            <link rel="icon" href={`${basePath}/favicon.ico`} />
+            <link rel="icon" type="image/svg+xml" href={`${basePath}/favicon-raccoon.svg`} />
         </Head>
     );
 }
