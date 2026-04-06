@@ -72,11 +72,11 @@ export class Trash extends Component<TrashProps, TrashState> {
 
     showTrashItems = (): React.ReactNode => {
         return (
-            <div className="flex-grow ml-4 flex flex-wrap items-start content-start justify-start overflow-y-auto windowMainScreen cursor-default">
+            <div className="flex-grow p-3 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-4 gap-x-2 md:gap-x-4 items-start content-start overflow-y-auto windowMainScreen cursor-default">
                 {
                     this.trashItems.map((item, index) => {
                         return (
-                            <div key={index} tabIndex={1} onFocus={this.focusFile} onBlur={this.focusFile} className="flex flex-col items-center text-sm outline-none w-24 my-4 mx-8 cursor-default">
+                            <div key={index} tabIndex={1} onFocus={this.focusFile} onBlur={this.focusFile} className="flex flex-col items-center text-sm outline-none w-full px-1 cursor-default">
                                 <div className="w-16 h-16 flex items-center justify-center">
                                     <img src={item.icon} alt="Ubuntu File Icons" />
                                 </div>

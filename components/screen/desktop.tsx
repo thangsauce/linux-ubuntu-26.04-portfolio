@@ -423,6 +423,12 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
         if (this.state.disabled_apps[objId]) return;
 
         const wasShowingApps = this.state.allAppsView;
+        const isClosed = this.state.closed_windows[objId];
+
+        // Recover from stale stack entries so closed apps can always reopen.
+        if (isClosed && this.app_stack.includes(objId)) {
+            this.app_stack = this.app_stack.filter(id => id !== objId);
+        }
 
         if (this.state.minimized_windows[objId]) {
             // focus this app's window
@@ -442,8 +448,8 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
             return;
         }
 
-        //if app is already opened
-        if (this.app_stack.includes(objId)) {
+        // if app is already opened
+        if (!isClosed && this.app_stack.includes(objId)) {
             if (wasShowingApps) {
                 this.setState({ allAppsView: false });
                 this.focus(objId);
@@ -516,7 +522,10 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
     closeApp = (objId: string) => {
 
         // remove app from the app stack
-        this.app_stack.splice(this.app_stack.indexOf(objId), 1);
+        const appIndex = this.app_stack.indexOf(objId);
+        if (appIndex !== -1) {
+            this.app_stack.splice(appIndex, 1);
+        }
 
         this.giveFocusToLastApp();
 
@@ -525,11 +534,15 @@ export class Desktop extends Component<DesktopProps, DesktopState> {
         // close window
         let closed_windows = this.state.closed_windows;
         let favourite_apps = this.state.favourite_apps;
+        let focused_windows = this.state.focused_windows;
+        let minimized_windows = this.state.minimized_windows;
 
         if (this.initFavourite[objId] === false) favourite_apps[objId] = false; // if user default app is not favourite, remove from sidebar
         closed_windows[objId] = true; // closes the app's window
+        focused_windows[objId] = false;
+        minimized_windows[objId] = false;
 
-        this.setState({ closed_windows, favourite_apps });
+        this.setState({ closed_windows, favourite_apps, focused_windows, minimized_windows });
     }
 
     focus = (objId: string) => {
