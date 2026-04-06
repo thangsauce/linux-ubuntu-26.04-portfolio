@@ -1,14 +1,8 @@
 # Linux Ubuntu 26.04 Portfolio
 
-An interactive portfolio experience that looks and feels like a Linux desktop environment.  
-Instead of a typical scrolling resume page, this project lets visitors explore your profile through desktop apps, windows, and system UI inspired by Ubuntu 26.04 (Yaru style).
+A portfolio website that recreates a Linux desktop experience, letting visitors explore your work through app windows, dock interactions, and Ubuntu-inspired UI.
 
 Live site: [https://thangsauce.github.io/linux-ubuntu-26.04-portfolio](https://thangsauce.github.io/linux-ubuntu-26.04-portfolio)
-
-## Description
-
-This project is a portfolio-as-an-OS concept built with Next.js and TypeScript.  
-Visitors can open apps, switch between windows, use the dock, browse content sections, and interact with a simulated desktop workflow that showcases projects, skills, and personality in a memorable way.
 
 ## Highlights
 
