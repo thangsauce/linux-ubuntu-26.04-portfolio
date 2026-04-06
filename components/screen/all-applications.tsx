@@ -100,7 +100,6 @@ export class AllApplications extends React.Component<AllApplicationsProps, AllAp
                         <div
                             key={index}
                             onClick={handleOpen}
-                            onTouchEnd={(e) => { e.preventDefault(); handleOpen(); }}
                             className="flex flex-col items-center justify-start p-2 rounded-lg cursor-pointer hover:bg-white hover:bg-opacity-10 transition-colors select-none"
                             data-context="desktop-app"
                             data-app-id={app.id}

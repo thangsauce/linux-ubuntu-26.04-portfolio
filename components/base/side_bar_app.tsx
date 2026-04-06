@@ -52,7 +52,6 @@ export class SideBarApp extends Component<SideBarAppProps, SideBarAppState> {
             <div
                 tabIndex={0}
                 onClick={this.openApp}
-                onTouchEnd={(e) => { e.preventDefault(); this.openApp(); }}
                 onMouseEnter={() => {
                     this.setState({ showTitle: true });
                 }}

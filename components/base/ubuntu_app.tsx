@@ -44,8 +44,7 @@ export class UbuntuApp extends Component<UbuntuAppProps, UbuntuAppState> {
                     (this.state.shaking ? ' animate-shake' : '')
                 }
                 id={'app-' + this.props.id}
-                onDoubleClick={this.openApp}
-                onTouchEnd={(e) => { e.preventDefault(); this.openApp(); }}
+                onClick={this.openApp}
                 data-context="desktop-app"
                 data-app-id={this.props.id}
                 tabIndex={0}
