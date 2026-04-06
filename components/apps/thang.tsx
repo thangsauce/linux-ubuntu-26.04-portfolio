@@ -99,18 +99,18 @@ export class AboutThang extends Component<Record<string, never>, AboutThangState
                 <div className="md:flex hidden flex-col w-1/4 md:w-1/5 text-sm overflow-y-auto windowMainScreen border-r border-black">
                     {this.renderNavLinks()}
                 </div>
-                <div onClick={this.showNavBar} className="md:hidden flex items-center gap-2 absolute bg-ub-cool-grey hover:bg-ub-warm-grey hover:bg-opacity-20 rounded-md px-2.5 py-1.5 top-2 left-2 cursor-default border border-white border-opacity-10">
+                <div onClick={this.showNavBar} className="md:hidden flex items-center gap-2 absolute z-30 bg-ub-cool-grey hover:bg-ub-warm-grey hover:bg-opacity-20 rounded-md px-2.5 py-1.5 top-2 left-2 cursor-default border border-white border-opacity-10">
                     <div className="flex flex-col gap-0.5 justify-center">
                         <div className="w-3.5 border-t border-white"></div>
                         <div className="w-3.5 border-t border-white"></div>
                         <div className="w-3.5 border-t border-white"></div>
                     </div>
                     <span className="text-xs text-gray-300 whitespace-nowrap">More Details</span>
-                    <div className={(this.state.navbar ? " visible animateShow z-30 " : " invisible ") + " md:hidden text-xs absolute bg-ub-cool-grey py-0.5 px-1 rounded-sm top-full mt-1 left-0 shadow border-black border border-opacity-20"}>
+                    <div className={(this.state.navbar ? " block animateShow z-30 " : " hidden ") + " md:hidden text-xs absolute bg-ub-cool-grey py-0.5 px-1 rounded-sm top-full mt-1 left-0 shadow border-black border border-opacity-20"}>
                         {this.renderNavLinks()}
                     </div>
                 </div>
-                <div className="flex flex-col w-3/4 md:w-4/5 justify-start items-center flex-grow bg-ub-grey overflow-y-auto windowMainScreen">
+                <div className="flex flex-col w-full md:w-4/5 justify-start items-center flex-grow bg-ub-grey overflow-y-auto windowMainScreen pt-12 md:pt-0">
                     {this.state.screen}
                 </div>
             </div>
